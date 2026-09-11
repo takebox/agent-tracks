@@ -1,17 +1,17 @@
-"""Skill validation logic."""
+"""Track validation logic."""
 
 import unicodedata
 from pathlib import Path
 from typing import Optional
 
 from .errors import ParseError
-from .parser import find_skill_md, parse_frontmatter
+from .parser import find_track_md, parse_frontmatter
 
-MAX_SKILL_NAME_LENGTH = 64
+MAX_TRACK_NAME_LENGTH = 64
 MAX_DESCRIPTION_LENGTH = 1024
 MAX_COMPATIBILITY_LENGTH = 500
 
-# Allowed frontmatter fields per Agent Skills Spec
+# Allowed frontmatter fields per Agent Tracks Spec
 ALLOWED_FIELDS = {
     "name",
     "description",
@@ -22,10 +22,10 @@ ALLOWED_FIELDS = {
 }
 
 
-def _validate_name(name: str, skill_dir: Path) -> list[str]:
-    """Validate skill name format and directory match.
+def _validate_name(name: str, track_dir: Path) -> list[str]:
+    """Validate track name format and directory match.
 
-    Skill names support i18n characters (Unicode letters) plus hyphens.
+    Track names support i18n characters (Unicode letters) plus hyphens.
     Names must be lowercase and cannot start/end with hyphens.
     """
     errors = []
@@ -36,32 +36,32 @@ def _validate_name(name: str, skill_dir: Path) -> list[str]:
 
     name = unicodedata.normalize("NFKC", name.strip())
 
-    if len(name) > MAX_SKILL_NAME_LENGTH:
+    if len(name) > MAX_TRACK_NAME_LENGTH:
         errors.append(
-            f"Skill name '{name}' exceeds {MAX_SKILL_NAME_LENGTH} character limit "
+            f"Track name '{name}' exceeds {MAX_TRACK_NAME_LENGTH} character limit "
             f"({len(name)} chars)"
         )
 
     if name != name.lower():
-        errors.append(f"Skill name '{name}' must be lowercase")
+        errors.append(f"Track name '{name}' must be lowercase")
 
     if name.startswith("-") or name.endswith("-"):
-        errors.append("Skill name cannot start or end with a hyphen")
+        errors.append("Track name cannot start or end with a hyphen")
 
     if "--" in name:
-        errors.append("Skill name cannot contain consecutive hyphens")
+        errors.append("Track name cannot contain consecutive hyphens")
 
     if not all(c.isalnum() or c == "-" for c in name):
         errors.append(
-            f"Skill name '{name}' contains invalid characters. "
+            f"Track name '{name}' contains invalid characters. "
             "Only letters, digits, and hyphens are allowed."
         )
 
-    if skill_dir:
-        dir_name = unicodedata.normalize("NFKC", skill_dir.name)
+    if track_dir:
+        dir_name = unicodedata.normalize("NFKC", track_dir.name)
         if dir_name != name:
             errors.append(
-                f"Directory name '{skill_dir.name}' must match skill name '{name}'"
+                f"Directory name '{track_dir.name}' must match track name '{name}'"
             )
 
     return errors
@@ -90,7 +90,6 @@ def _validate_compatibility(compatibility: str) -> list[str]:
 
     if not isinstance(compatibility, str):
         errors.append("Field 'compatibility' must be a string")
-        return errors
 
     if len(compatibility) > MAX_COMPATIBILITY_LENGTH:
         errors.append(
@@ -115,15 +114,15 @@ def _validate_metadata_fields(metadata: dict) -> list[str]:
     return errors
 
 
-def validate_metadata(metadata: dict, skill_dir: Optional[Path] = None) -> list[str]:
-    """Validate parsed skill metadata.
+def validate_metadata(metadata: dict, track_dir: Optional[Path] = None) -> list[str]:
+    """Validate parsed track metadata.
 
     This is the core validation function that works on already-parsed metadata,
     avoiding duplicate file I/O when called from the parser.
 
     Args:
         metadata: Parsed YAML frontmatter dictionary
-        skill_dir: Optional path to skill directory (for name-directory match check)
+        track_dir: Optional path to track directory (for name-directory match check)
 
     Returns:
         List of validation error messages. Empty list means valid.
@@ -134,7 +133,7 @@ def validate_metadata(metadata: dict, skill_dir: Optional[Path] = None) -> list[
     if "name" not in metadata:
         errors.append("Missing required field in frontmatter: name")
     else:
-        errors.extend(_validate_name(metadata["name"], skill_dir))
+        errors.extend(_validate_name(metadata["name"], track_dir))
 
     if "description" not in metadata:
         errors.append("Missing required field in frontmatter: description")
@@ -147,31 +146,31 @@ def validate_metadata(metadata: dict, skill_dir: Optional[Path] = None) -> list[
     return errors
 
 
-def validate(skill_dir: Path) -> list[str]:
-    """Validate a skill directory.
+def validate(track_dir: Path) -> list[str]:
+    """Validate a track directory.
 
     Args:
-        skill_dir: Path to the skill directory
+        track_dir: Path to the track directory
 
     Returns:
         List of validation error messages. Empty list means valid.
     """
-    skill_dir = Path(skill_dir)
+    track_dir = Path(track_dir)
 
-    if not skill_dir.exists():
-        return [f"Path does not exist: {skill_dir}"]
+    if not track_dir.exists():
+        return [f"Path does not exist: {track_dir}"]
 
-    if not skill_dir.is_dir():
-        return [f"Not a directory: {skill_dir}"]
+    if not track_dir.is_dir():
+        return [f"Not a directory: {track_dir}"]
 
-    skill_md = find_skill_md(skill_dir)
-    if skill_md is None:
-        return ["Missing required file: SKILL.md"]
+    track_md = find_track_md(track_dir)
+    if track_md is None:
+        return ["Missing required file: TRACK.md"]
 
     try:
-        content = skill_md.read_text()
+        content = track_md.read_text()
         metadata, _ = parse_frontmatter(content)
     except ParseError as e:
         return [str(e)]
 
-    return validate_metadata(metadata, skill_dir)
+    return validate_metadata(metadata, track_dir)

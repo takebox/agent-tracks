@@ -1,11 +1,11 @@
 [project]
-name = "skills-ref"
+name = "tracks-ref"
 version = "0.1.0"
-description = "Reference library for Agent Skills"
+description = "Reference library for Agent Tracks"
 license = "Apache-2.0"
 readme = "README.md"
 authors = [
-    { name = "Keith Lazuka", email = "klazuka@anthropic.com" }
+    { name = "Haijun" }
 ]
 requires-python = ">=3.11"
 dependencies = [
@@ -14,14 +14,14 @@ dependencies = [
 ]
 
 [project.scripts]
-skills-ref = "skills_ref.cli:main"
+tracks-ref = "tracks_ref.cli:main"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/skills_ref"]
+packages = ["src/tracks_ref"]
 
 [dependency-groups]
 dev = [

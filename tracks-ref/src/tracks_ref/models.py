@@ -1,19 +1,19 @@
-"""Data models for Agent Skills."""
+"""Data models for Agent Tracks."""
 
 from dataclasses import dataclass, field
 from typing import Optional
 
 
 @dataclass
-class SkillProperties:
-    """Properties parsed from a skill's SKILL.md frontmatter.
+class TrackProperties:
+    """Properties parsed from a track's TRACK.md frontmatter.
 
     Attributes:
-        name: Skill name in kebab-case (required)
-        description: What the skill does and when the model should use it (required)
-        license: License for the skill (optional)
-        compatibility: Compatibility information for the skill (optional)
-        allowed_tools: Tool patterns the skill requires (optional, experimental)
+        name: Track name in kebab-case (required)
+        description: What the track does and when the model should use it (required)
+        license: License for the track (optional)
+        compatibility: Compatibility information for the track (optional)
+        allowed_tools: Tool patterns the track requires (optional, experimental)
         metadata: Key-value pairs for client-specific properties (defaults to
             empty dict; omitted from to_dict() output when empty)
     """

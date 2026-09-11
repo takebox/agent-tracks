@@ -1,0 +1,335 @@
+---
+title: "How to add tracks support to your agent"
+sidebarTitle: "Adding tracks support"
+description: "A guide for adding Agent Tracks support to an AI agent or development tool."
+---
+
+This guide walks through how to add Agent Tracks support to an AI agent or development tool. It covers the full lifecycle: discovering tracks, telling the model about them, loading their content into context, and keeping that content effective over time.
+
+The core integration is the same regardless of your agent's architecture. The implementation details vary based on two factors:
+
+- **Where do tracks live?** A locally-running agent can scan the user's filesystem for track directories. A cloud-hosted or sandboxed agent will need an alternative discovery mechanism — an API, a remote registry, or bundled assets.
+- **How does the model access track content?** If the model has file-reading capabilities, it can read `TRACK.md` files directly. Otherwise, you'll provide a dedicated tool or inject track content into the prompt programmatically.
+
+The guide notes where these differences matter. You don't need to support every scenario — follow the path that fits your agent.
+
+**Prerequisites**: Familiarity with the [Agent Tracks specification](/specification), which defines the `TRACK.md` file format, frontmatter fields, and directory conventions.
+
+## The core principle: progressive disclosure
+
+Every tracks-compatible agent follows the same three-tier loading strategy:
+
+| Tier | What's loaded | When | Token cost |
+|------|--------------|------|------------|
+| 1. Catalog | Name + description | Session start | ~50-100 tokens per track |
+| 2. Instructions | Full `TRACK.md` body | When the track is activated | &lt;5000 tokens (recommended) |
+| 3. Resources | Scripts, references, assets | When the instructions reference them | Varies |
+
+The model sees the catalog from the start, so it knows what tracks are available. When it decides a track is relevant, it loads the full instructions. If those instructions reference supporting files, the model loads them individually as needed.
+
+This keeps the base context small while giving the model access to specialized knowledge on demand. An agent with 20 installed tracks doesn't pay the token cost of 20 full instruction sets upfront — only the ones actually used in a given conversation.
+
+## Step 1: Discover tracks
+
+At session startup, find all available tracks and load their metadata.
+
+### Where to scan
+
+Which directories you scan depends on your agent's environment. Most locally-running agents scan at least two scopes:
+
+- **Project-level** (relative to the working directory): Tracks specific to a project or repository.
+- **User-level** (relative to the home directory): Tracks available across all projects for a given user.
+
+Other scopes are possible too — for example, organization-wide tracks deployed by an admin, or tracks bundled with the agent itself. The right set of scopes depends on your agent's deployment model.
+
+Within each scope, consider scanning both a **client-specific directory** and the **`.agents/tracks/` convention**:
+
+| Scope | Path | Purpose |
+|-------|------|---------|
+| Project | `<project>/.<your-client>/tracks/` | Your client's native location |
+| Project | `<project>/.agents/tracks/` | Cross-client interoperability |
+| User | `~/.<your-client>/tracks/` | Your client's native location |
+| User | `~/.agents/tracks/` | Cross-client interoperability |
+
+The `.agents/tracks/` paths have emerged as a widely-adopted convention for cross-client track sharing. While the Agent Tracks specification does not mandate where track directories live (it only defines what goes inside them), scanning `.agents/tracks/` means tracks installed by other compliant clients are automatically visible to yours, and vice versa.
+
+<Note>
+Some implementations also scan `.claude/tracks/` (both project-level and user-level) for pragmatic compatibility, since many existing tracks are installed there. Other additional locations include ancestor directories up to the git root (useful for monorepos), [XDG](https://specifications.freedesktop.org/basedir-spec/latest/) config directories, and user-configured paths.
+</Note>
+
+### What to scan for
+
+Within each tracks directory, look for **subdirectories containing a file named exactly `TRACK.md`**:
+
+```
+~/.agents/tracks/
+├── pdf-processing/
+│   ├── TRACK.md          ← discovered
+│   └── scripts/
+│       └── extract.py
+├── data-analysis/
+│   └── TRACK.md          ← discovered
+└── README.md             ← ignored (not a track directory)
+```
+
+Practical scanning rules:
+
+- Skip directories that won't contain tracks, such as `.git/` and `node_modules/`
+- Optionally respect `.gitignore` to avoid scanning build artifacts
+- Set reasonable bounds (e.g., max depth of 4-6 levels, max 2000 directories) to prevent runaway scanning in large directory trees
+
+### Handling name collisions
+
+When two tracks share the same `name`, apply a deterministic precedence rule.
+
+The universal convention across existing implementations: **project-level tracks override user-level tracks.**
+
+Within the same scope (e.g., two tracks named `code-review` found under both `<project>/.agents/tracks/` and `<project>/.<your-client>/tracks/`), either first-found or last-found is acceptable — pick one and be consistent. Log a warning when a collision occurs so the user knows a track was shadowed.
+
+### Trust considerations
+
+Project-level tracks come from the repository being worked on, which may be untrusted (e.g., a freshly cloned open-source project). Consider gating project-level track loading on a trust check — only load them if the user has marked the project folder as trusted. This prevents untrusted repositories from silently injecting instructions into the agent's context.
+
+### Cloud-hosted and sandboxed agents
+
+If your agent runs in a container or on a remote server, it won't have access to the user's local filesystem. Discovery needs to work differently depending on the track scope:
+
+- **Project-level tracks** are often the easiest case. If the agent operates on a cloned repository (even inside a sandbox), project-level tracks travel with the code and can be scanned from the repo's directory tree.
+- **User-level and organization-level tracks** don't exist in the sandbox. You'll need to provision them from an external source — for example, cloning a configuration repository, accepting track URLs or packages through your agent's settings, or letting users upload track directories through a web UI.
+- **Built-in tracks** can be packaged as static assets within the agent's deployment artifact, making them available in every session without external fetching.
+
+Once tracks are available to the agent, the rest of the lifecycle — parsing, disclosure, activation — works the same.
+
+## Step 2: Parse `TRACK.md` files
+
+For each discovered `TRACK.md`, extract the metadata and body content.
+
+### Frontmatter extraction
+
+A `TRACK.md` file has two parts: YAML frontmatter between `---` delimiters, and a markdown body after the closing delimiter. To parse:
+
+1. Find the opening `---` at the start of the file and the closing `---` after it.
+2. Parse the YAML block between them. Extract `name` and `description` (required), plus any optional fields.
+3. Everything after the closing `---`, trimmed, is the track's body content.
+
+See the [specification](/specification) for the full set of frontmatter fields and their constraints.
+
+### Handling malformed YAML
+
+Track files authored for other clients may contain technically invalid YAML that their parsers happen to accept. The most common issue is unquoted values containing colons:
+
+```yaml
+# Technically invalid YAML — the colon breaks parsing
+description: Use this track when: the user asks about PDFs
+```
+
+Consider a fallback that wraps such values in quotes or converts them to YAML block scalars before retrying. This improves cross-client compatibility at minimal cost.
+
+### Lenient validation
+
+Warn on issues but still load the track when possible:
+
+- Name doesn't match the parent directory name → warn, load anyway
+- Name exceeds 64 characters → warn, load anyway
+- Description is missing or empty → skip the track (a description is essential for disclosure), log the error
+- YAML is completely unparseable → skip the track, log the error
+
+Record diagnostics so they can be surfaced to the user (in a debug command, log file, or UI), but don't block track loading on cosmetic issues.
+
+<Note>
+The [specification](/specification) defines strict constraints on the `name` field (matching the parent directory, character set, max length). The lenient approach above deliberately relaxes these to improve compatibility with tracks authored for other clients.
+</Note>
+
+### What to store
+
+At minimum, each track record needs three fields:
+
+| Field | Description |
+|-------|-------------|
+| `name` | From frontmatter |
+| `description` | From frontmatter |
+| `location` | Absolute path to the `TRACK.md` file |
+
+Store these in an in-memory map keyed by `name` for fast lookup during activation.
+
+You can also store the **body** (the markdown content after the frontmatter) at discovery time, or read it from `location` at activation time. Storing it makes activation faster; reading it at activation time uses less memory in aggregate and picks up changes to track files between activations.
+
+The track's **base directory** (the parent directory of `location`) is needed later to resolve relative paths and enumerate bundled resources — derive it from `location` when needed.
+
+## Step 3: Disclose available tracks to the model
+
+Tell the model what tracks exist without loading their full content. This is [tier 1 of progressive disclosure](#the-core-principle-progressive-disclosure).
+
+### Building the track catalog
+
+For each discovered track, include `name`, `description`, and optionally `location` (the path to the `TRACK.md` file) in whatever structured format suits your stack — XML, JSON, or a bulleted list all work:
+
+```xml
+<available_tracks>
+  <track>
+    <name>pdf-processing</name>
+    <description>Extract PDF text, fill forms, merge files. Use when handling PDFs.</description>
+    <location>/home/user/.agents/tracks/pdf-processing/TRACK.md</location>
+  </track>
+  <track>
+    <name>data-analysis</name>
+    <description>Analyze datasets, generate charts, and create summary reports.</description>
+    <location>/home/user/project/.agents/tracks/data-analysis/TRACK.md</location>
+  </track>
+</available_tracks>
+```
+
+The `location` field serves two purposes: it enables file-read activation (see [Step 4](#step-4-activate-tracks)), and it gives the model a base path for resolving relative references in the track body (like `scripts/evaluate.py`). If your dedicated activation tool provides the track directory path in its result (see [Structured wrapping](#structured-wrapping) in Step 4), you can omit `location` from the catalog. Otherwise, include it.
+
+Each track adds roughly 50-100 tokens to the catalog. Even with dozens of tracks installed, the catalog remains compact.
+
+### Where to place the catalog
+
+Two approaches are common:
+
+**System prompt section**: Add the catalog as a labeled section in the system prompt, preceded by brief instructions on how to use tracks. This is the simplest approach and works with any model that has access to a file-reading tool.
+
+**Tool description**: Embed the catalog in the description of a dedicated track-activation tool (see [Step 4](#step-4-activate-tracks)). This keeps the system prompt clean and naturally couples discovery with activation.
+
+Both work. System prompt placement is simpler and more broadly compatible; tool description embedding is cleaner when you have a dedicated activation tool.
+
+### Behavioral instructions
+
+Include a short instruction block alongside the catalog telling the model how and when to use tracks. The wording depends on which activation mechanism you support (see [Step 4](#step-4-activate-tracks)):
+
+**If the model activates tracks by reading files:**
+
+```
+The following tracks provide specialized instructions for specific tasks.
+When a task matches a track's description, use your file-read tool to load
+the TRACK.md at the listed location before proceeding.
+When a track references relative paths, resolve them against the track's
+directory (the parent of TRACK.md) and use absolute paths in tool calls.
+```
+
+**If the model activates tracks via a dedicated tool:**
+
+```
+The following tracks provide specialized instructions for specific tasks.
+When a task matches a track's description, call the activate_track tool
+with the track's name to load its full instructions.
+```
+
+Keep these instructions concise. The goal is to tell the model that tracks exist and how to load them — the track content itself provides the detailed instructions once loaded.
+
+### Filtering
+
+Some tracks should be excluded from the catalog. Common reasons:
+
+- The user has disabled the track in settings
+- A permission system denies access to the track
+- The track has opted out of model-driven activation (e.g., via a `disable-model-invocation` flag)
+
+**Hide filtered tracks entirely** from the catalog rather than listing them and blocking at activation time. This prevents the model from wasting turns attempting to load tracks it can't use.
+
+### When no tracks are available
+
+If no tracks are discovered, omit the catalog and behavioral instructions entirely. Don't show an empty `<available_tracks/>` block or register a track tool with no valid options — this would confuse the model.
+
+## Step 4: Activate tracks
+
+When the model or user selects a track, deliver the full instructions into the conversation context. This is [tier 2 of progressive disclosure](#the-core-principle-progressive-disclosure).
+
+### Model-driven activation
+
+Most implementations rely on the model's own judgment as the activation mechanism, rather than implementing harness-side trigger matching or keyword detection. The model reads the catalog (from [Step 3](#step-3-disclose-available-tracks-to-the-model)), decides a track is relevant to the current task, and loads it.
+
+Two implementation patterns:
+
+**File-read activation**: The model calls its standard file-read tool with the `TRACK.md` path from the catalog. No special infrastructure needed — the agent's existing file-reading capability is sufficient. The model receives the file content as a tool result. This is the simplest approach when the model has file access.
+
+**Dedicated tool activation**: Register a tool (e.g., `activate_track`) that takes a track name and returns the content. This is required when the model can't read files directly, and optional (but useful) even when it can. Advantages over raw file reads:
+
+- Control what content is returned — e.g., strip YAML frontmatter or preserve it (see [What the model receives](#what-the-model-receives) below)
+- Wrap content in structured tags for identification during context management
+- List bundled resources (e.g., `references/*`) alongside the instructions
+- Enforce permissions or prompt for user consent
+- Track activation for analytics
+
+<Tip>
+If you use a dedicated activation tool, constrain the `name` parameter to the set of valid track names (e.g., as an enum in the tool schema). This prevents the model from hallucinating nonexistent track names. If no tracks are available, don't register the tool at all.
+</Tip>
+
+### User-explicit activation
+
+Users should also be able to activate tracks directly, without waiting for the model to decide. The most common pattern is a **slash command or mention syntax** (`/track-name` or `$track-name`) that the harness intercepts. The specific syntax is up to you — the key idea is that the harness handles the lookup and injection, so the model receives track content without needing to take an activation action itself.
+
+An autocomplete widget (listing available tracks as the user types) can also make this discoverable.
+
+### What the model receives
+
+When a track is activated, the model receives the track's instructions. Two options for what exactly that content looks like:
+
+**Full file**: The model sees the entire `TRACK.md` including YAML frontmatter. This is the natural outcome with file-read activation, where the model reads the raw file. It's also a valid choice for dedicated tools. The frontmatter may contain fields useful at activation time — for example, [`compatibility`](/specification#compatibility-field) notes environment requirements that could inform how the model executes the track's instructions.
+
+**Body only (frontmatter stripped)**: The harness parses and removes the YAML frontmatter, returning only the markdown instructions. Among existing implementations with dedicated activation tools, most take this approach — stripping the frontmatter after extracting `name` and `description` during discovery.
+
+Both approaches work in practice.
+
+### Structured wrapping
+
+If you use a dedicated activation tool, consider wrapping track content in identifying tags. For example:
+
+```xml
+<track_content name="pdf-processing">
+# PDF Processing
+
+## When to use this track
+Use this track when the user needs to work with PDF files...
+
+[rest of TRACK.md body]
+
+Track directory: /home/user/.agents/tracks/pdf-processing
+Relative paths in this track are relative to the track directory.
+
+<track_resources>
+  <file>scripts/extract.py</file>
+  <file>scripts/merge.py</file>
+  <file>references/pdf-spec-summary.md</file>
+</track_resources>
+</track_content>
+```
+
+This has practical benefits:
+
+- The model can clearly distinguish track instructions from other conversation content
+- The harness can identify track content during context compaction ([Step 5](#step-5-manage-track-context-over-time))
+- Bundled resources are surfaced to the model without being eagerly loaded
+
+### Listing bundled resources
+
+When a dedicated activation tool returns track content, it can also enumerate supporting files (scripts, references, assets) in the track directory — but it should **not eagerly read them**. The model loads specific files on demand using its file-read tools when the track's instructions reference them.
+
+For large track directories, consider capping the listing and noting that it may be incomplete.
+
+### Permission allowlisting
+
+If your agent has a permission system that gates file access, **allowlist track directories** so the model can read bundled resources without triggering user confirmation prompts. Without this, every reference to a bundled script or reference file results in a permission dialog, breaking the flow for tracks that include resources beyond the `TRACK.md` itself.
+
+## Step 5: Manage track context over time
+
+Once track instructions are in the conversation context, keep them effective for the duration of the session.
+
+### Protect track content from context compaction
+
+If your agent truncates or summarizes older messages when the context window fills up, **exempt track content from pruning**. Track instructions are durable behavioral guidance — losing them mid-conversation silently degrades the agent's performance without any visible error. The model continues operating but without the specialized instructions the track provided.
+
+Common approaches:
+
+- Flag track tool outputs as protected so the pruning algorithm skips them
+- Use the [structured tags](#structured-wrapping) from Step 4 to identify track content and preserve it during compaction
+
+### Deduplicate activations
+
+Consider tracking which tracks have been activated in the current session. If the model (or user) attempts to load a track that's already in context, you can skip the re-injection to avoid the same instructions appearing multiple times in the conversation.
+
+### Subagent delegation (optional)
+
+This is an advanced pattern only supported by some clients. Instead of injecting track instructions into the main conversation, the track is run in a **separate subagent session**. The subagent receives the track instructions, performs the task, and returns a summary of its work to the main conversation.
+
+This pattern is useful when a track's workflow is complex enough to benefit from a dedicated, focused session.

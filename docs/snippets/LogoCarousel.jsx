@@ -1,5 +1,5 @@
 {/*
-  LogoCarousel component for the Agent Skills documentation.
+  LogoCarousel component for the Agent Tracks documentation.
   Shuffles clients on each page load for fair exposure.
 */}
 export const LogoCarousel = ({clients}) => {

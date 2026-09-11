@@ -1,14 +1,14 @@
 ---
-title: "Using scripts in skills"
+title: "Using scripts in tracks"
 sidebarTitle: "Using scripts"
-description: "How to run commands and bundle executable scripts in your skills."
+description: "How to run commands and bundle executable scripts in your tracks."
 ---
 
-Skills can instruct agents to run shell commands and bundle reusable scripts in a `scripts/` directory. This guide covers one-off commands, self-contained scripts with their own dependencies, and how to design script interfaces for agentic use.
+Tracks can instruct agents to run shell commands and bundle reusable scripts in a `scripts/` directory. This guide covers one-off commands, self-contained scripts with their own dependencies, and how to design script interfaces for agentic use.
 
 ## One-off commands
 
-When an existing package already does what you need, you can reference it directly in your `SKILL.md` instructions without a `scripts/` directory. Many ecosystems provide tools that auto-resolve dependencies at runtime.
+When an existing package already does what you need, you can reference it directly in your `TRACK.md` instructions without a `scripts/` directory. Many ecosystems provide tools that auto-resolve dependencies at runtime.
 
 <Tabs sync={false}>
   <Tab title="uvx">
@@ -80,19 +80,19 @@ When an existing package already does what you need, you can reference it direct
   </Tab>
 </Tabs>
 
-**Tips for one-off commands in skills:**
+**Tips for one-off commands in tracks:**
 
 - **Pin versions** (e.g., `npx eslint@9.0.0`) so the command behaves the same over time.
-- **State prerequisites** in your `SKILL.md` (e.g., "Requires Node.js 18+") rather than assuming the agent's environment has them. For runtime-level requirements, use the [`compatibility` frontmatter field](/specification#compatibility-field).
+- **State prerequisites** in your `TRACK.md` (e.g., "Requires Node.js 18+") rather than assuming the agent's environment has them. For runtime-level requirements, use the [`compatibility` frontmatter field](/specification#compatibility-field).
 - **Move complex commands into scripts.** A one-off command works well when you're invoking a tool with a few flags. When a command grows complex enough that it's hard to get right on the first try, a tested script in `scripts/` is more reliable.
 
-## Referencing scripts from `SKILL.md`
+## Referencing scripts from `TRACK.md`
 
-Use **relative paths from the skill directory root** to reference bundled files. The agent resolves these paths automatically — no absolute paths needed.
+Use **relative paths from the track directory root** to reference bundled files. The agent resolves these paths automatically — no absolute paths needed.
 
-List available scripts in your `SKILL.md` so the agent knows they exist:
+List available scripts in your `TRACK.md` so the agent knows they exist:
 
-```markdown SKILL.md
+```markdown TRACK.md
 ## Available scripts
 
 - **`scripts/validate.sh`** — Validates configuration files
@@ -101,7 +101,7 @@ List available scripts in your `SKILL.md` so the agent knows they exist:
 
 Then instruct the agent to run them:
 
-````markdown SKILL.md
+````markdown TRACK.md
 ## Workflow
 
 1. Run the validation script:
@@ -116,7 +116,7 @@ Then instruct the agent to run them:
 ````
 
 <Note>
-The same relative-path convention works in support files like `references/*.md` — script execution paths (in code blocks) are relative to the **skill directory root**, because the agent runs commands from there.
+The same relative-path convention works in support files like `references/*.md` — script execution paths (in code blocks) are relative to the **track directory root**, because the agent runs commands from there.
 </Note>
 
 ## Self-contained scripts

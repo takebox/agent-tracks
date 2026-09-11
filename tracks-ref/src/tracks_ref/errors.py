@@ -1,20 +1,20 @@
-"""Skill-related exceptions."""
+"""Track-related exceptions."""
 
 
-class SkillError(Exception):
-    """Base exception for all skill-related errors."""
-
-    pass
-
-
-class ParseError(SkillError):
-    """Raised when SKILL.md parsing fails."""
+class TrackError(Exception):
+    """Base exception for all track-related errors."""
 
     pass
 
 
-class ValidationError(SkillError):
-    """Raised when skill properties are invalid.
+class ParseError(TrackError):
+    """Raised when TRACK.md parsing fails."""
+
+    pass
+
+
+class ValidationError(TrackError):
+    """Raised when track properties are invalid.
 
     Attributes:
         errors: List of validation error messages (may contain just one)

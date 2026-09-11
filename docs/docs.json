@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Agent Skills",
+  "name": "Agent Tracks",
   "colors": {
     "primary": "#7f7f7f",
     "light": "#bfbfbf",
@@ -9,13 +9,13 @@
   },
   "favicon": "/favicon.svg",
   "banner": {
-    "content": "Agent Skills now has an official [Discord server](https://discord.gg/MKPE9g8aUy). See the [announcement](https://github.com/agentskills/agentskills/discussions/273) for details.",
+    "content": "Agent Tracks now has an official [Discord server](https://discord.gg/MKPE9g8aUy). See the [announcement](https://github.com/takebox/agent-tracks/discussions/273) for details.",
     "dismissible": true
   },
   "navbar": {
     "primary": {
       "type": "github",
-      "href": "https://github.com/agentskills/agentskills"
+      "href": "https://github.com/takebox/agent-tracks"
     }
   },
   "navigation": {
@@ -24,19 +24,19 @@
       "specification",
       "clients",
       {
-        "group": "For skill creators",
+        "group": "For track creators",
         "pages": [
-          "skill-creation/quickstart",
-          "skill-creation/best-practices",
-          "skill-creation/optimizing-descriptions",
-          "skill-creation/evaluating-skills",
-          "skill-creation/using-scripts"
+          "track-creation/quickstart",
+          "track-creation/best-practices",
+          "track-creation/optimizing-descriptions",
+          "track-creation/evaluating-tracks",
+          "track-creation/using-scripts"
         ]
       },
       {
         "group": "For client implementors",
         "pages": [
-          "client-implementation/adding-skills-support"
+          "client-implementation/adding-tracks-support"
         ]
       }
     ]
@@ -56,7 +56,7 @@
   "redirects": [
     {
       "source": "/integrate-skills",
-      "destination": "/client-implementation/adding-skills-support"
+      "destination": "/client-implementation/adding-tracks-support"
     },
     {
       "source": "/what-are-skills",

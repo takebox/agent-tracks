@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/session-start.sh"
+            "command": ".haijun/hooks/session-start.sh"
           }
         ]
       }

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Session start hook for agentskills documentation project
+# Session start hook for agent tracks documentation project
 echo '{"async":true,"asyncTimeout":15000}'
 
 # Check if Mintlify CLI is installed

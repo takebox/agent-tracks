@@ -1,4 +1,4 @@
-"""YAML frontmatter parsing for SKILL.md files."""
+"""YAML frontmatter parsing for TRACK.md files."""
 
 from pathlib import Path
 from typing import Optional
@@ -6,32 +6,32 @@ from typing import Optional
 import strictyaml
 
 from .errors import ParseError, ValidationError
-from .models import SkillProperties
+from .models import TrackProperties
 
 
-def find_skill_md(skill_dir: Path) -> Optional[Path]:
-    """Find the SKILL.md file in a skill directory.
+def find_track_md(track_dir: Path) -> Optional[Path]:
+    """Find the TRACK.md file in a track directory.
 
-    Prefers SKILL.md (uppercase) but accepts skill.md (lowercase).
+    Prefers TRACK.md (uppercase) but accepts track.md (lowercase).
 
     Args:
-        skill_dir: Path to the skill directory
+        track_dir: Path to the track directory
 
     Returns:
-        Path to the SKILL.md file, or None if not found
+        Path to the TRACK.md file, or None if not found
     """
-    for name in ("SKILL.md", "skill.md"):
-        path = skill_dir / name
+    for name in ("TRACK.md", "track.md"):
+        path = track_dir / name
         if path.exists():
             return path
     return None
 
 
 def parse_frontmatter(content: str) -> tuple[dict, str]:
-    """Parse YAML frontmatter from SKILL.md content.
+    """Parse YAML frontmatter from TRACK.md content.
 
     Args:
-        content: Raw content of SKILL.md file
+        content: Raw content of TRACK.md file
 
     Returns:
         Tuple of (metadata dict, markdown body)
@@ -40,11 +40,11 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
         ParseError: If frontmatter is missing or invalid
     """
     if not content.startswith("---"):
-        raise ParseError("SKILL.md must start with YAML frontmatter (---)")
+        raise ParseError("TRACK.md must start with YAML frontmatter (---)")
 
     parts = content.split("---", 2)
     if len(parts) < 3:
-        raise ParseError("SKILL.md frontmatter not properly closed with ---")
+        raise ParseError("TRACK.md frontmatter not properly closed with ---")
 
     frontmatter_str = parts[1]
     body = parts[2].strip()
@@ -56,7 +56,7 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
         raise ParseError(f"Invalid YAML in frontmatter: {e}")
 
     if not isinstance(metadata, dict):
-        raise ParseError("SKILL.md frontmatter must be a YAML mapping")
+        raise ParseError("TRACK.md frontmatter must be a YAML mapping")
 
     if "metadata" in metadata and isinstance(metadata["metadata"], dict):
         metadata["metadata"] = {str(k): str(v) for k, v in metadata["metadata"].items()}
@@ -64,29 +64,29 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
     return metadata, body
 
 
-def read_properties(skill_dir: Path) -> SkillProperties:
-    """Read skill properties from SKILL.md frontmatter.
+def read_properties(track_dir: Path) -> TrackProperties:
+    """Read track properties from TRACK.md frontmatter.
 
     This function parses the frontmatter and returns properties.
     It does NOT perform full validation. Use validate() for that.
 
     Args:
-        skill_dir: Path to the skill directory
+        track_dir: Path to the track directory
 
     Returns:
-        SkillProperties with parsed metadata
+        TrackProperties with parsed metadata
 
     Raises:
-        ParseError: If SKILL.md is missing or has invalid YAML
+        ParseError: If TRACK.md is missing or has invalid YAML
         ValidationError: If required fields (name, description) are missing
     """
-    skill_dir = Path(skill_dir)
-    skill_md = find_skill_md(skill_dir)
+    track_dir = Path(track_dir)
+    track_md = find_track_md(track_dir)
 
-    if skill_md is None:
-        raise ParseError(f"SKILL.md not found in {skill_dir}")
+    if track_md is None:
+        raise ParseError(f"TRACK.md not found in {track_dir}")
 
-    content = skill_md.read_text()
+    content = track_md.read_text()
     metadata, _ = parse_frontmatter(content)
 
     if "name" not in metadata:
@@ -102,7 +102,7 @@ def read_properties(skill_dir: Path) -> SkillProperties:
     if not isinstance(description, str) or not description.strip():
         raise ValidationError("Field 'description' must be a non-empty string")
 
-    return SkillProperties(
+    return TrackProperties(
         name=name.strip(),
         description=description.strip(),
         license=metadata.get("license"),

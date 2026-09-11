@@ -1,5 +1,5 @@
 /*
-  Shared client data for the Agent Skills documentation.
+  Shared client data for the Agent Tracks documentation.
 
   To add a new client:
   1. Add logo files to /images/logos/[logo-name]/
