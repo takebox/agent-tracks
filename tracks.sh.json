@@ -1,0 +1,21 @@
+{
+  "$schema": "https://tracks.web.id/schemas/tracks.web.id.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Review",
+      "description": "Tracks for code review closeout and remote validation.",
+      "tracks": ["autoreview", "behavior-validator", "crabbox"]
+    },
+    {
+      "title": "Handoff",
+      "description": "Tracks for sharing context across agents, PRs, and issues.",
+      "tracks": ["handoff", "agent-transcript"]
+    },
+    {
+      "title": "Sessions",
+      "description": "Tracks for inspecting and sharing local agent sessions.",
+      "tracks": ["session-viewer", "beam"]
+    }
+  ]
+}
