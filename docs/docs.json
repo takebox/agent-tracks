@@ -46,7 +46,7 @@
       "copy",
       "view",
       "chatgpt",
-      "claude",
+      "haijun",
       "perplexity",
       "mcp",
       "cursor",
@@ -55,11 +55,11 @@
   },
   "redirects": [
     {
-      "source": "/integrate-skills",
+      "source": "/integrate-tracks",
       "destination": "/client-implementation/adding-tracks-support"
     },
     {
-      "source": "/what-are-skills",
+      "source": "/what-are-tracks",
       "destination": "/"
     }
   ]

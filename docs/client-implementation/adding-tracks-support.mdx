@@ -54,7 +54,7 @@ Within each scope, consider scanning both a **client-specific directory** and th
 The `.agents/tracks/` paths have emerged as a widely-adopted convention for cross-client track sharing. While the Agent Tracks specification does not mandate where track directories live (it only defines what goes inside them), scanning `.agents/tracks/` means tracks installed by other compliant clients are automatically visible to yours, and vice versa.
 
 <Note>
-Some implementations also scan `.claude/tracks/` (both project-level and user-level) for pragmatic compatibility, since many existing tracks are installed there. Other additional locations include ancestor directories up to the git root (useful for monorepos), [XDG](https://specifications.freedesktop.org/basedir-spec/latest/) config directories, and user-configured paths.
+Some implementations also scan `.haijun/tracks/` (both project-level and user-level) for pragmatic compatibility, since many existing tracks are installed there. Other additional locations include ancestor directories up to the git root (useful for monorepos), [XDG](https://specifications.freedesktop.org/basedir-spec/latest/) config directories, and user-configured paths.
 </Note>
 
 ### What to scan for

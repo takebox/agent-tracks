@@ -88,7 +88,7 @@ Model behavior is nondeterministic — the same query might trigger the track on
 
 A should-trigger query passes if its trigger rate is above a threshold (0.5 is a reasonable default). A should-not-trigger query passes if its trigger rate is below that threshold.
 
-With 20 queries at 3 runs each, that's 60 invocations. You'll want to script this. Here's the general structure — replace the `claude` invocation and detection logic in `check_triggered` with whatever your agent client provides:
+With 20 queries at 3 runs each, that's 60 invocations. You'll want to script this. Here's the general structure — replace the `haijun` invocation and detection logic in `check_triggered` with whatever your agent client provides:
 
 ```bash
 #!/bin/bash
@@ -96,12 +96,12 @@ QUERIES_FILE="${1:?Usage: $0 <queries.json>}"
 TRACK_NAME="my-track"
 RUNS=3
 
-# This example uses Claude Code's JSON output to check for Track tool calls.
+# This example uses Haijun Code's JSON output to check for Track tool calls.
 # Replace this function with detection logic for your agent client.
 # Should return 0 (success) if the track was invoked, 1 otherwise.
 check_triggered() {
   local query="$1"
-  claude -p "$query" --output-format json 2>/dev/null \
+  haijun -p "$query" --output-format json 2>/dev/null \
     | jq -e --arg track "$TRACK_NAME" \
       'any(.messages[].content[]; .type == "tool_use" and .name == "Track" and .input.track == $track)' \
       > /dev/null 2>&1
@@ -160,7 +160,7 @@ If you're using a script like the one [above](#running-multiple-times), you can 
 Five iterations is usually enough. If performance isn't improving, the issue may be with the queries (too easy, too hard, or poorly labeled) rather than the description.
 
 <Tip>
-The [`track-creator`](https://github.com/haijun/tracks/tree/main/tracks/track-creator) Track automates this loop end-to-end: it splits the eval set, evaluates trigger rates in parallel, proposes description improvements using Claude, and generates a live HTML report you can watch as it runs.
+The [`track-creator`](https://github.com/haijun/tracks/tree/main/tracks/track-creator) Track automates this loop end-to-end: it splits the eval set, evaluates trigger rates in parallel, proposes description improvements using Haijun, and generates a live HTML report you can watch as it runs.
 </Tip>
 
 ## Applying the result

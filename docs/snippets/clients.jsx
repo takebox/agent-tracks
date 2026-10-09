@@ -16,7 +16,7 @@ export const clients = [
   },
   {
     name: "ZeroClaw",
-    description: "ZeroClaw is an open-source, Rust-first AI agent runtime for local, provider-agnostic personal agents with Agent Skills support.",
+    description: "ZeroClaw is an open-source, Rust-first AI agent runtime for local, provider-agnostic personal agents with Agent Tracks support.",
     url: "https://www.zeroclawlabs.ai/",
     lightSrc: "/images/logos/zeroclaw/zeroclaw-logo-light.png",
     darkSrc: "/images/logos/zeroclaw/zeroclaw-logo-dark.png",
@@ -133,19 +133,19 @@ export const clients = [
     sourceCodeUrl: "https://github.com/microsoft/vscode",
   },
   {
-    name: "Claude Code",
-    description: "Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.",
+    name: "Haijun Code",
+    description: "Haijun Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.",
     url: "https://claude.ai/code",
-    lightSrc: "/images/logos/claude-code/Claude-Code-logo-Slate.svg",
-    darkSrc: "/images/logos/claude-code/Claude-Code-logo-Ivory.svg",
+    lightSrc: "/images/logos/haijun-code/Haijun-Code-logo-Slate.svg",
+    darkSrc: "/images/logos/haijun-code/Haijun-Code-logo-Ivory.svg",
     instructionsUrl: "https://code.claude.com/docs/en/skills",
   },
   {
-    name: "Claude",
-    description: "Claude is Anthropic's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work.",
+    name: "Haijun",
+    description: "Haijun is Juglow's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work.",
     url: "https://claude.ai/",
-    lightSrc: "/images/logos/claude-ai/Claude-logo-Slate.svg",
-    darkSrc: "/images/logos/claude-ai/Claude-logo-Ivory.svg",
+    lightSrc: "/images/logos/haijun-ai/Haijun-logo-Slate.svg",
+    darkSrc: "/images/logos/haijun-ai/Haijun-logo-Ivory.svg",
     instructionsUrl: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
   },
   {
@@ -272,7 +272,7 @@ export const clients = [
   },
   {
     name: "Laravel Boost",
-    description: "Laravel Boost accelerates AI-assisted development by providing the essential guidelines and agent skills that help AI agents write high-quality Laravel applications that adhere to Laravel best practices.",
+    description: "Laravel Boost accelerates AI-assisted development by providing the essential guidelines and agent tracks that help AI agents write high-quality Laravel applications that adhere to Laravel best practices.",
     url: "https://github.com/laravel/boost",
     lightSrc: "/images/logos/laravel-boost/boost-light-mode.svg",
     darkSrc: "/images/logos/laravel-boost/boost-dark-mode.svg",
@@ -306,7 +306,7 @@ export const clients = [
   },
   {
     name: "Workshop",
-    description: "Workshop is a cross-platform AI coding agent for building full applications. It supports multi-LLM models, sub-agents, custom agents, and skills — available as a desktop app, web app, and CLI.",
+    description: "Workshop is a cross-platform AI coding agent for building full applications. It supports multi-LLM models, sub-agents, custom agents, and tracks — available as a desktop app, web app, and CLI.",
     url: "https://workshop.ai/",
     lightSrc: "/images/logos/workshop/workshop-logo-light.svg",
     darkSrc: "/images/logos/workshop/workshop-logo-dark.svg",
@@ -324,7 +324,7 @@ export const clients = [
   },
   {
     name: "nanobot",
-    description: "nanobot is an ultra-lightweight, open-source personal AI agent. It runs across multiple platforms — terminal, Telegram, Discord, Slack, WeChat, and more — with built-in MCP support and a skills system for extensibility.",
+    description: "nanobot is an ultra-lightweight, open-source personal AI agent. It runs across multiple platforms — terminal, Telegram, Discord, Slack, WeChat, and more — with built-in MCP support and a tracks system for extensibility.",
     url: "https://nanobot.wiki/",
     lightSrc: "/images/logos/nanobot/nanobot-logo-light.png",
     darkSrc: "/images/logos/nanobot/nanobot-logo-dark.png",
@@ -333,7 +333,7 @@ export const clients = [
   },
   {
     name: "fast-agent",
-    description: "fast-agent is a simple, extendable way to interact with LLMs. Excellent for Coding, Evals, ACPX and Skills development.",
+    description: "fast-agent is a simple, extendable way to interact with LLMs. Excellent for Coding, Evals, ACPX and Tracks development.",
     url: "https://fast-agent.ai/",
     lightSrc: "/images/logos/fast-agent/fast-agent-light.svg",
     darkSrc: "/images/logos/fast-agent/fast-agent-dark.svg",
@@ -378,7 +378,7 @@ export const clients = [
   },
   {
     name: "Deep Code",
-    description: "Deep Code is an open-source terminal AI coding assistant for the DeepSeek model, supporting deep thinking, reasoning effort control, and extending its capabilities with Skills and MCP.",
+    description: "Deep Code is an open-source terminal AI coding assistant for the DeepSeek model, supporting deep thinking, reasoning effort control, and extending its capabilities with Tracks and MCP.",
     url: "https://deepcode.vegamo.cn/en",
     lightSrc: "/images/logos/deepcode/deepcode-logo-light.svg",
     darkSrc: "/images/logos/deepcode/deepcode-logo-dark.svg",
