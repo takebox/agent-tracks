@@ -10,18 +10,18 @@ We welcome improvements to the [documentation site](https://agent.tracks.web.id)
 
 ### Bug Reports
 
-Found a bug in the spec, documentation, or reference library? [Open an issue](https://github.com/takebox/AgentTracks/issues).
+Found a bug in the spec, documentation, or reference library? [Open an issue](https://github.com/track-md/agent-tracks/issues).
 
 ### Proposals, Questions, and Feedback
 
-Have a feature request, spec design question, or general feedback? [Start a discussion](https://github.com/takebox/AgentTracks/discussions). We use Discussions for proposals and open-ended conversation, and reserve Issues for concrete bugs and problems.
+Have a feature request, spec design question, or general feedback? [Start a discussion](https://github.com/track-md/agent-tracks/discussions). We use Discussions for proposals and open-ended conversation, and reserve Issues for concrete bugs and problems.
 
 Proposals should address real implementation challenges you've encountered, not theoretical concerns. Show us the problem you faced and how your proposal addresses it.
 
 We maintain a high bar for additions to the spec — it is much easier to add things to a specification than to remove them. Every new feature adds complexity that all implementers must understand and support. When in doubt, leave it out.
 
 > [!NOTE]
-> **Not sure where to post?** Default to [Discussions](https://github.com/takebox/AgentTracks/discussions). If it turns out to be a bug, we'll convert it to an issue.
+> **Not sure where to post?** Default to [Discussions](https://github.com/track-md/agent-tracks/discussions). If it turns out to be a bug, we'll convert it to an issue.
 
 ### Ecosystem Listings & Logo Requests
 
@@ -37,7 +37,7 @@ We may ask for a demo or screenshot to verify the implementation. Logo requests 
 
 ### Reference Library (`tracks-ref/`)
 
-We're still determining the direction for the reference library and are not accepting code contributions to it at this time. Bug reports and feedback are still welcome via [Issues](https://github.com/takebox/AgentTracks/issues) and [Discussions](https://github.com/takebox/AgentTracks/discussions), respectively.
+We're still determining the direction for the reference library and are not accepting code contributions to it at this time. Bug reports and feedback are still welcome via [Issues](https://github.com/track-md/agent-tracks/issues) and [Discussions](https://github.com/track-md/agent-tracks/discussions), respectively.
 
 ### What We're Not Accepting (Yet)
 
@@ -46,7 +46,7 @@ To keep the project focused during this early stage, we are currently not accept
 - **Track submissions** — We don't maintain a directory of community tracks. This may change in the future.
 - **Major architectural changes** — We're still iterating on the core specification. Large-scale redesigns are premature.
 
-If you're unsure whether your contribution fits, open a [Discussion](https://github.com/takebox/AgentTracks/discussions) before investing significant effort.
+If you're unsure whether your contribution fits, open a [Discussion](https://github.com/track-md/agent-tracks/discussions) before investing significant effort.
 
 ## Development Setup
 
