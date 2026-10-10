@@ -135,7 +135,7 @@ export const clients = [
   {
     name: "Haijun Code",
     description: "Haijun Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.",
-    url: "https://claude.ai/code",
+    url: "https://haijun.my.id/code",
     lightSrc: "/images/logos/haijun-code/Haijun-Code-logo-Slate.svg",
     darkSrc: "/images/logos/haijun-code/Haijun-Code-logo-Ivory.svg",
     instructionsUrl: "https://tracks.web.id",
@@ -143,7 +143,7 @@ export const clients = [
   {
     name: "Haijun",
     description: "Haijun is Juglow's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work.",
-    url: "https://claude.ai/",
+    url: "https://haijun.my.id",
     lightSrc: "/images/logos/haijun-ai/Haijun-logo-Slate.svg",
     darkSrc: "/images/logos/haijun-ai/Haijun-logo-Ivory.svg",
     instructionsUrl: "https://tracks.web.id",
