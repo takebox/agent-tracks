@@ -12,7 +12,7 @@ export const clients = [
     url: "https://junie.jetbrains.com/",
     lightSrc: "/images/logos/junie/junie-logo-on-white.svg",
     darkSrc: "/images/logos/junie/junie-logo-on-dark.svg",
-    instructionsUrl: "https://junie.jetbrains.com/docs/agent-skills.html",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "ZeroClaw",
@@ -21,7 +21,7 @@ export const clients = [
     lightSrc: "/images/logos/zeroclaw/zeroclaw-logo-light.png",
     darkSrc: "/images/logos/zeroclaw/zeroclaw-logo-dark.png",
     scale: 0.45,
-    instructionsUrl: "https://docs.zeroclawlabs.ai/master/en/tools/skills.html",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/zeroclaw-labs/zeroclaw",
   },
   {
@@ -30,7 +30,7 @@ export const clients = [
     url: "https://geminicli.com",
     lightSrc: "/images/logos/gemini-cli/gemini-cli-logo_light.svg",
     darkSrc: "/images/logos/gemini-cli/gemini-cli-logo_dark.svg",
-    instructionsUrl: "https://geminicli.com/docs/cli/skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/google-gemini/gemini-cli",
   },
   {
@@ -40,7 +40,7 @@ export const clients = [
     lightSrc: "/images/logos/autohand/autohand-light.svg",
     darkSrc: "/images/logos/autohand/autohand-dark.svg",
     scale: 0.8,
-    instructionsUrl: "https://autohand.ai/docs/working-with-autohand-code/agent-skills.html",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/autohandai/code-cli",
   },
   {
@@ -49,7 +49,7 @@ export const clients = [
     url: "https://opencode.ai/",
     lightSrc: "/images/logos/opencode/opencode-wordmark-light.svg",
     darkSrc: "/images/logos/opencode/opencode-wordmark-dark.svg",
-    instructionsUrl: "https://opencode.ai/docs/skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/sst/opencode",
   },
   {
@@ -58,7 +58,7 @@ export const clients = [
     url: "https://openhands.dev/",
     lightSrc: "/images/logos/openhands/openhands-logo-light.svg",
     darkSrc: "/images/logos/openhands/openhands-logo-dark.svg",
-    instructionsUrl: "https://docs.openhands.dev/overview/skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/OpenHands/OpenHands",
   },
   {
@@ -68,7 +68,7 @@ export const clients = [
     lightSrc: "/images/logos/mux/mux-editor-light.svg",
     darkSrc: "/images/logos/mux/mux-editor-dark.svg",
     scale: 0.8,
-    instructionsUrl: "https://mux.coder.com/agent-skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/coder/mux",
   },
   {
@@ -77,7 +77,7 @@ export const clients = [
     url: "https://cursor.com/",
     lightSrc: "/images/logos/cursor/LOCKUP_HORIZONTAL_2D_LIGHT.svg",
     darkSrc: "/images/logos/cursor/LOCKUP_HORIZONTAL_2D_DARK.svg",
-    instructionsUrl: "https://cursor.com/docs/context/skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Amp",
@@ -86,7 +86,7 @@ export const clients = [
     lightSrc: "/images/logos/amp/amp-logo-light.svg",
     darkSrc: "/images/logos/amp/amp-logo-dark.svg",
     scale: 0.8,
-    instructionsUrl: "https://ampcode.com/manual#agent-skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Letta",
@@ -94,7 +94,7 @@ export const clients = [
     url: "https://www.letta.com/",
     lightSrc: "/images/logos/letta/Letta-logo-RGB_OffBlackonTransparent.svg",
     darkSrc: "/images/logos/letta/Letta-logo-RGB_GreyonTransparent.svg",
-    instructionsUrl: "https://docs.letta.com/letta-code/skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/letta-ai/letta",
   },
   {
@@ -103,7 +103,7 @@ export const clients = [
     url: "https://firebender.com/",
     lightSrc: "/images/logos/firebender/firebender-wordmark-light.svg",
     darkSrc: "/images/logos/firebender/firebender-wordmark-dark.svg",
-    instructionsUrl: "https://docs.firebender.com/multi-agent/skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Goose",
@@ -111,7 +111,7 @@ export const clients = [
     url: "https://block.github.io/goose/",
     lightSrc: "/images/logos/goose/goose-logo-black.png",
     darkSrc: "/images/logos/goose/goose-logo-white.png",
-    instructionsUrl: "https://block.github.io/goose/docs/guides/context-engineering/using-skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/block/goose",
   },
   {
@@ -120,7 +120,7 @@ export const clients = [
     url: "https://github.com/",
     lightSrc: "/images/logos/github/GitHub_Lockup_Dark.svg",
     darkSrc: "/images/logos/github/GitHub_Lockup_Light.svg",
-    instructionsUrl: "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/microsoft/vscode-copilot-chat",
   },
   {
@@ -129,7 +129,7 @@ export const clients = [
     url: "https://code.visualstudio.com/",
     lightSrc: "/images/logos/vscode/vscode.svg",
     darkSrc: "/images/logos/vscode/vscode-alt.svg",
-    instructionsUrl: "https://code.visualstudio.com/docs/copilot/customization/agent-skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/microsoft/vscode",
   },
   {
@@ -138,7 +138,7 @@ export const clients = [
     url: "https://claude.ai/code",
     lightSrc: "/images/logos/haijun-code/Haijun-Code-logo-Slate.svg",
     darkSrc: "/images/logos/haijun-code/Haijun-Code-logo-Ivory.svg",
-    instructionsUrl: "https://code.claude.com/docs/en/skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Haijun",
@@ -146,7 +146,7 @@ export const clients = [
     url: "https://claude.ai/",
     lightSrc: "/images/logos/haijun-ai/Haijun-logo-Slate.svg",
     darkSrc: "/images/logos/haijun-ai/Haijun-logo-Ivory.svg",
-    instructionsUrl: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "ChatGPT & Codex",
@@ -154,7 +154,7 @@ export const clients = [
     url: "https://chatgpt.com/codex/",
     lightSrc: "/images/logos/chatgpt/light.svg",
     darkSrc: "/images/logos/chatgpt/dark.svg",
-    instructionsUrl: "https://developers.openai.com/codex/skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/openai/codex",
   },
   {
@@ -170,7 +170,7 @@ export const clients = [
     url: "https://factory.ai/",
     lightSrc: "/images/logos/factory/factory-logo-light.svg",
     darkSrc: "/images/logos/factory/factory-logo-dark.svg",
-    instructionsUrl: "https://docs.factory.ai/cli/configuration/skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "pi",
@@ -179,7 +179,7 @@ export const clients = [
     lightSrc: "/images/logos/pi/pi-logo-light.svg",
     darkSrc: "/images/logos/pi/pi-logo-dark.svg",
     scale: 0.55,
-    instructionsUrl: "https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/skills.md",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/badlogic/pi-mono",
   },
   {
@@ -188,7 +188,7 @@ export const clients = [
     url: "https://databricks.com/",
     lightSrc: "/images/logos/databricks/databricks-logo-light.svg",
     darkSrc: "/images/logos/databricks/databricks-logo-dark.svg",
-    instructionsUrl: "https://docs.databricks.com/aws/en/assistant/skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Agentman",
@@ -196,7 +196,7 @@ export const clients = [
     url: "https://agentman.ai/",
     lightSrc: "/images/logos/agentman/agentman-wordmark-light.svg",
     darkSrc: "/images/logos/agentman/agentman-wordmark-dark.svg",
-    instructionsUrl: "https://agentman.ai/agentskills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "TRAE",
@@ -213,7 +213,7 @@ export const clients = [
     url: "https://docs.spring.io/spring-ai/reference",
     lightSrc: "/images/logos/spring-ai/spring-ai-logo-light.svg",
     darkSrc: "/images/logos/spring-ai/spring-ai-logo-dark.svg",
-    instructionsUrl: "https://spring.io/blog/2026/01/13/spring-ai-generic-agent-skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/spring-projects/spring-ai",
   },
   {
@@ -222,7 +222,7 @@ export const clients = [
     url: "https://roocode.com",
     lightSrc: "/images/logos/roo-code/roo-code-logo-black.svg",
     darkSrc: "/images/logos/roo-code/roo-code-logo-white.svg",
-    instructionsUrl: "https://docs.roocode.com/features/skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/RooCodeInc/Roo-Code",
   },
   {
@@ -242,7 +242,7 @@ export const clients = [
     lightSrc: "/images/logos/command-code/command-code-logo-for-light.svg",
     darkSrc: "/images/logos/command-code/command-code-logo-for-dark.svg",
     scale: 1.33,
-    instructionsUrl: "https://commandcode.ai/docs/skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Ona",
@@ -251,7 +251,7 @@ export const clients = [
     lightSrc: "/images/logos/ona/ona-wordmark-light.svg",
     darkSrc: "/images/logos/ona/ona-wordmark-dark.svg",
     scale: 0.8,
-    instructionsUrl: "https://ona.com/docs/ona/agents-md#skills-for-repository-specific-workflows",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "VT Code",
@@ -259,7 +259,7 @@ export const clients = [
     url: "https://github.com/vinhnx/vtcode",
     lightSrc: "/images/logos/vtcode/vt_code_light.svg",
     darkSrc: "/images/logos/vtcode/vt_code_dark.svg",
-    instructionsUrl: "https://github.com/vinhnx/vtcode/blob/main/docs/skills/SKILLS_GUIDE.md",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/vinhnx/VTCode",
   },
   {
@@ -268,7 +268,7 @@ export const clients = [
     url: "https://www.qodo.ai/",
     lightSrc: "/images/logos/qodo/qodo-logo-light.png",
     darkSrc: "/images/logos/qodo/qodo-logo-dark.svg",
-    instructionsUrl: "https://www.qodo.ai/blog/how-i-use-qodos-agent-skills-to-auto-fix-issues-in-pull-requests/",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Laravel Boost",
@@ -276,7 +276,7 @@ export const clients = [
     url: "https://github.com/laravel/boost",
     lightSrc: "/images/logos/laravel-boost/boost-light-mode.svg",
     darkSrc: "/images/logos/laravel-boost/boost-dark-mode.svg",
-    instructionsUrl: "https://laravel.com/docs/12.x/boost#agent-skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/laravel/boost",
   },
   {
@@ -285,7 +285,7 @@ export const clients = [
     url: "https://emdash.sh",
     lightSrc: "/images/logos/emdash/emdash-logo-light.svg",
     darkSrc: "/images/logos/emdash/emdash-logo-dark.svg",
-    instructionsUrl: "https://docs.emdash.sh/skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/generalaction/emdash",
   },
   {
@@ -294,7 +294,7 @@ export const clients = [
     url: "https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code",
     lightSrc: "/images/logos/snowflake/snowflake-logo-light.svg",
     darkSrc: "/images/logos/snowflake/snowflake-logo-dark.svg",
-    instructionsUrl: "https://docs.snowflake.com/en/user-guide/cortex-code/extensibility#extensibility-skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Kiro",
@@ -302,7 +302,7 @@ export const clients = [
     url: "https://kiro.dev/",
     lightSrc: "/images/logos/kiro/kiro-logo-light.svg",
     darkSrc: "/images/logos/kiro/kiro-logo-dark.svg",
-    instructionsUrl: "https://kiro.dev/docs/skills/",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Workshop",
@@ -319,7 +319,7 @@ export const clients = [
     lightSrc: "/images/logos/google-ai-edge-gallery/google-ai-edge-gallery-light.svg",
     darkSrc: "/images/logos/google-ai-edge-gallery/google-ai-edge-gallery-dark.svg",
     scale: 0.45,
-    instructionsUrl: "https://github.com/google-ai-edge/gallery/tree/main/skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/google-ai-edge/gallery",
   },
   {
@@ -328,7 +328,7 @@ export const clients = [
     url: "https://nanobot.wiki/",
     lightSrc: "/images/logos/nanobot/nanobot-logo-light.png",
     darkSrc: "/images/logos/nanobot/nanobot-logo-dark.png",
-    instructionsUrl: "https://nanobot.wiki/docs/0.1.5/use-nanobot/skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/HKUDS/nanobot",
   },
   {
@@ -338,7 +338,7 @@ export const clients = [
     lightSrc: "/images/logos/fast-agent/fast-agent-light.svg",
     darkSrc: "/images/logos/fast-agent/fast-agent-dark.svg",
     scale: 1.33,
-    instructionsUrl: "https://fast-agent.ai/agents/skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/evalstate/fast-agent",
   },
   {
@@ -348,7 +348,7 @@ export const clients = [
     lightSrc: "/images/logos/bub/bub-light.svg",
     darkSrc: "/images/logos/bub/bub-dark.svg",
     scale: 0.5,
-    instructionsUrl: "https://bub.build/docs/build/skills/",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/bubbuild/bub",
   },
   {
@@ -357,7 +357,7 @@ export const clients = [
     url: "https://www.tabnine.com/",
     lightSrc: "/images/logos/tabnine/tabnine-logo-light.svg",
     darkSrc: "/images/logos/tabnine/tabnine-logo-dark.svg",
-    instructionsUrl: "https://docs.tabnine.com/main/getting-started/tabnine-cli/features/agent-skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Vita",
@@ -365,7 +365,7 @@ export const clients = [
     url: "https://www.vita-ai.net",
     lightSrc: "/images/logos/vita/logo-horizontal-light.svg",
     darkSrc: "/images/logos/vita/logo-horizontal-dark.svg",
-    instructionsUrl: "https://www.vita-ai.net/docs/features/agent-skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Superconductor",
@@ -374,7 +374,7 @@ export const clients = [
     lightSrc: "/images/logos/superconductor/superconductor-wordmark-light.svg",
     darkSrc: "/images/logos/superconductor/superconductor-wordmark-dark.svg",
     scale: 1.33,
-    instructionsUrl: "https://superconductor.com/docs/project/mcp-and-skills",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Deep Code",
@@ -383,7 +383,7 @@ export const clients = [
     lightSrc: "/images/logos/deepcode/deepcode-logo-light.svg",
     darkSrc: "/images/logos/deepcode/deepcode-logo-dark.svg",
     scale: 0.5,
-    instructionsUrl: "https://deepcode.vegamo.cn/en/docs/configuration/agent-skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/lessweb/deepcode-cli",
   },
   {
@@ -393,7 +393,7 @@ export const clients = [
     lightSrc: "/images/logos/pulumi-neo/pulumi-neo-logo-light.svg",
     darkSrc: "/images/logos/pulumi-neo/pulumi-neo-logo-dark.svg",
     scale: 0.45,
-    instructionsUrl: "https://www.pulumi.com/docs/ai/skills/",
+    instructionsUrl: "https://tracks.web.id",
   },
   {
     name: "Hermes Agent",
@@ -401,7 +401,7 @@ export const clients = [
     url: "https://hermes-agent.nousresearch.com/",
     lightSrc: "/images/logos/hermes-agent/hermes-agent-logo-light.svg",
     darkSrc: "/images/logos/hermes-agent/hermes-agent-logo-dark.svg",
-    instructionsUrl: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/NousResearch/hermes-agent",
   },
   {
@@ -410,7 +410,7 @@ export const clients = [
     url: "https://openclaw.ai/",
     lightSrc: "/images/logos/openclaw/light.svg",
     darkSrc: "/images/logos/openclaw/dark.svg",
-    instructionsUrl: "https://docs.openclaw.ai/tools/skills",
+    instructionsUrl: "https://tracks.web.id",
     sourceCodeUrl: "https://github.com/openclaw/openclaw",
   },
 ];
