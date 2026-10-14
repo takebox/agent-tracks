@@ -9,13 +9,13 @@
   },
   "favicon": "/favicon.svg",
   "banner": {
-    "content": "Agent Tracks now has an official [Discord server](https://discord.gg/MKPE9g8aUy). See the [announcement](https://github.com/track-md/agent-tracks/discussions/273) for details.",
+    "content": "Agent Tracks now has an official [Discord server](https://discord.gg/MKPE9g8aUy). See the [announcement](https://github.com/takebox/agent-tracks/discussions/273) for details.",
     "dismissible": true
   },
   "navbar": {
     "primary": {
       "type": "github",
-      "href": "https://github.com/track-md/agent-tracks"
+      "href": "https://github.com/takebox/agent-tracks"
     }
   },
   "navigation": {
