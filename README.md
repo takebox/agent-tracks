@@ -1,7 +1,5 @@
 # Agent Tracks
 
-[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/MKPE9g8aUy)
-
 A standardized way to give AI agents new capabilities and expertise.
 
 ## What are Agent Tracks?
@@ -48,7 +46,7 @@ Agent Tracks are supported by a large number of AI tools and agentic clients —
 - **[Documentation](https://agent.tracks.web.id)** — Guides and tutorials
 - **[Specification](https://agent.tracks.web.id/specification)** — Format details
 - **[Example Tracks](https://github.com/takebox/agent-tracks)** — See what's possible
-- **[Discord](https://discord.gg/MKPE9g8aUy)** — Share what you're building!
+
 
 ## Open development
 
